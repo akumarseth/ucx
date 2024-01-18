@@ -147,7 +147,7 @@ cython_debug/
 dev/cleanup.py
 
 .databricks
-.vscode
+# .vscode
 
 .python-version
 .databricks-login.json

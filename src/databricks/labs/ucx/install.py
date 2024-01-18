@@ -1000,7 +1000,7 @@ class WorkspaceInstaller:
 #     installer.run()
             
 
-def main_install(host, token):
+async def main_install(host, token):
     logger = get_logger(__file__)
     logger.setLevel("INFO")
 
