@@ -228,19 +228,19 @@ class WorkspaceInstaller:
             if gscript.enabled:
                 logger.info("Global Init Script already exists and enabled. Skipped creating a new one.")
             elif not gscript.enabled and self._prompts:
-                if self._prompts.confirm(
-                    "Your Global Init Script with required spark config is disabled, Do you want to enable it?"
-                ):
-                    logger.info("Enabling Global Init Script...")
-                    hms_lineage.enable_global_init_script(gscript)
-                else:
-                    logger.info("No change to Global Init Script is made.")
+                # if self._prompts.confirm(
+                #     "Your Global Init Script with required spark config is disabled, Do you want to enable it?"
+                # ):
+                logger.info("Enabling Global Init Script...")
+                hms_lineage.enable_global_init_script(gscript)
+                # else:
+                #     logger.info("No change to Global Init Script is made.")
         elif not gscript and self._prompts:
-            if self._prompts.confirm(
-                "No Global Init Script with Required Spark Config exists, Do you want to create one?"
-            ):
-                logger.info("Creating Global Init Script...")
-                hms_lineage.add_global_init_script()
+            # if self._prompts.confirm(
+            #     "No Global Init Script with Required Spark Config exists, Do you want to create one?"
+            # ):
+            logger.info("Creating Global Init Script...")
+            hms_lineage.add_global_init_script()
 
     @staticmethod
     def run_for_config(
@@ -632,8 +632,8 @@ class WorkspaceInstaller:
         self._ws.workspace.upload(path, intro.encode("utf8"), overwrite=True)
         url = self.notebook_link(path)
         logger.info(f"Created README notebook with job overview: {url}")
-        if self._prompts and self._prompts.confirm("Open job overview in README notebook in your home directory?"):
-            webbrowser.open(url)
+        # if self._prompts and self._prompts.confirm("Open job overview in README notebook in your home directory?"):
+        #     webbrowser.open(url)
 
     def _replace_inventory_variable(self, text: str) -> str:
         return text.replace("$inventory", f"hive_metastore.{self.current_config.inventory_database}")
@@ -991,10 +991,19 @@ class WorkspaceInstaller:
             self.run_workflow(step)
 
 
-if __name__ == "__main__":
+# if __name__ == "__main__":
+#     logger = get_logger(__file__)
+#     logger.setLevel("INFO")
+
+#     ws = WorkspaceClient(product="ucx", product_version=__version__)
+#     installer = WorkspaceInstaller(ws, promtps=Prompts())
+#     installer.run()
+            
+
+def main_install(host, token):
     logger = get_logger(__file__)
     logger.setLevel("INFO")
 
-    ws = WorkspaceClient(product="ucx", product_version=__version__)
+    ws = WorkspaceClient(product="ucx", product_version=__version__, host=host, token=token)
     installer = WorkspaceInstaller(ws, promtps=Prompts())
     installer.run()

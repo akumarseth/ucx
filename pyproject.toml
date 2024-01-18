@@ -1,3 +1,9 @@
+[tool.poetry]
+name = "ucx"
+version = "0.1.0"
+description = "Your project description"
+authors = ["Abhishek Kumar <abhishk.kumar1@trdence.com>"]
+
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
